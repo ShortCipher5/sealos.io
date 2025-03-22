@@ -23,7 +23,7 @@ export default async function BlogLayout({
   if (!page) notFound();
   const category = getPageCategory(page);
 
-  // inline style: set the postion for toc; set as a global style will make docs page strange
+  // inline style: set the position for toc; set as a global style will make docs page strange
 
   return (
     <DocsLayout
@@ -36,7 +36,7 @@ export default async function BlogLayout({
       <style>
         {`@media (min-width: 768px) {
   .md\\:\\[--fd-nav-height\\:0px\\] {
-     --fd-nav-height: 100px !important;
+     --fd-nav-height: 60px !important;
   }
 }`}
       </style>
