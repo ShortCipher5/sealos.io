@@ -1,7 +1,11 @@
 import { GetStartedButton } from '@/components/ui/shiny-button';
 import { type AuthorData, blogAuthors, siteConfig } from '@/config/site';
 import { blog } from '@/lib/source';
-import { getBlogImage, getPageCategory, getPostsByLuaguage } from '@/lib/utils/blog-utils';
+import {
+  getBlogImage,
+  getPageCategory,
+  getPostsByLanguage,
+} from '@/lib/utils/blog-utils';
 import type { InferPageType } from 'fumadocs-core/source';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,7 +21,7 @@ import { languagesType } from '@/lib/i18n';
 
 
 function getAdjacentBlog(page: ReturnType<typeof blog.getPage>, lang: languagesType) {
-  const posts = getPostsByLuaguage(lang);
+  const posts = getPostsByLanguage(lang);
   const index = posts.findIndex((p) => p.data.title === page?.data.title);
   const prev = posts[index - 1];
   const next = posts[index + 1];
@@ -99,10 +103,13 @@ export default async function BlogLayout({
           itemType="http://schema.org/Article"
           itemScope
         >
-          <div className="mb-10 overflow-hidden rounded-2xl bg-gradient-to-b from-primary/10 to-background ">
+          <div className="mb-10 overflow-hidden rounded-2xl bg-linear-to-b from-primary/10 to-background ">
             <div className="relative h-[250px] w-full">
               <Image
-                src={getBlogImage(page.data.title, category)}
+                src={getBlogImage(
+                  page.data.imageTitle || page.data.title,
+                  category,
+                )}
                 alt={page.data.title}
                 fill
                 className="object-cover object-[center_60%]"
@@ -147,7 +154,7 @@ export default async function BlogLayout({
                     {page.data.authors.map((author, i) => (
                       <div
                         key={i}
-                        className="z-[1] hover:z-10"
+                        className="z-1 hover:z-10"
                         style={{ zIndex: page.data.authors.length - i }}
                       >
                         <AuthorAvatar author={blogAuthors[author]} />
@@ -222,7 +229,7 @@ function Cta({ lang }: { lang: languagesType }) {
   }[lang];
   
   return (
-    <div className="mt-16 rounded-2xl border border-blue-200/20 bg-gradient-to-br from-blue-500/10 via-blue-400/5 to-background p-8">
+    <div className="mt-16 rounded-2xl border border-blue-200/20 bg-linear-to-br from-blue-500/10 via-blue-400/5 to-background p-8">
       <div className="flex flex-col items-center text-center">
         <h3 className="text-2xl font-bold tracking-tight sm:text-3xl">
           {ctaText}

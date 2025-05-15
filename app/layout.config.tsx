@@ -1,7 +1,7 @@
 import { templateDomain } from '@/config/site';
 import { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import Image from 'next/image';
-import { languagesType } from '@/lib/i18n';
+import { getLanguageSlug, languagesType } from '@/lib/i18n';
 
 /**
  * Shared layout configurations
@@ -21,14 +21,10 @@ export const baseOptions: BaseLayoutProps = {
       </div>
     ),
   },
+  themeSwitch: {
+    enabled: false,
+  },
   githubUrl: 'https://github.com/labring/sealos',
-  links: [
-    {
-      text: 'Documentation',
-      url: '/docs',
-      active: 'nested-url',
-    },
-  ],
 };
 
 // Define the basic structure of navigation links
@@ -61,6 +57,11 @@ export const HeaderLinksData: HeaderLinkType[] = [
   //   isExternal: false,
   // },
   {
+    textKey: 'case',
+    urlKey: 'caseUrl',
+    isExternal: false,
+  },
+  {
     textKey: 'blog',
     urlKey: 'blogUrl',
     isExternal: false,
@@ -79,6 +80,7 @@ export const navTranslations: Record<languagesType, Record<string, string>> = {
     devbox: 'DevBox',
     appStore: 'App Store',
     docs: 'Docs',
+    case: 'Customers',
     blog: 'Blog',
     contact: 'Contact',
     getStarted: 'Get Started',
@@ -87,6 +89,7 @@ export const navTranslations: Record<languagesType, Record<string, string>> = {
     devboxUrl: '/devbox',
     appStoreUrl: templateDomain,
     docsUrl: '/docs',
+    caseUrl: '/customers',
     blogUrl: '/blog',
     contactUrl: 'mailto:contact@sealos.io',
   },
@@ -95,6 +98,7 @@ export const navTranslations: Record<languagesType, Record<string, string>> = {
     devbox: 'DevBox',
     appStore: '应用商店',
     docs: '文档',
+    case: '客户案例',
     blog: '博客',
     contact: '联系我们',
     getStarted: '免费体验 7 天',
@@ -103,6 +107,7 @@ export const navTranslations: Record<languagesType, Record<string, string>> = {
     devboxUrl: '/devbox',
     appStoreUrl: templateDomain,
     docsUrl: '/docs',
+    caseUrl: '/customers',
     blogUrl: '/blog',
     contactUrl:
       'https://fael3z0zfze.feishu.cn/share/base/form/shrcn5oHHTKCf3VREMKOhEy6fmf',
@@ -111,11 +116,16 @@ export const navTranslations: Record<languagesType, Record<string, string>> = {
 
 // Generate navigation links with translated text and URLs using the language parameter
 export const getHeaderLinks = (lang: languagesType) => {
-  return HeaderLinksData.map((link) => ({
-    text: navTranslations[lang][link.textKey],
-    url: navTranslations[lang][link.urlKey],
-    isExternal: link.isExternal,
-  }));
+  // Filter out the 'case' (Customers) link for English pages
+  return HeaderLinksData
+    .filter(link => !(link.textKey === 'case' && lang === 'en'))
+    .map((link) => ({
+      text: navTranslations[lang][link.textKey],
+      url:
+        (link.isExternal ? '' : getLanguageSlug(lang)) +
+        navTranslations[lang][link.urlKey],
+      isExternal: link.isExternal,
+    }));
 };
 
 // Maintain backwards compatibility with default English navigation links
