@@ -42,6 +42,11 @@ export const HeaderLinksData: HeaderLinkType[] = [
     isExternal: false,
   },
   {
+    textKey: 'databases',
+    urlKey: 'databasesUrl',
+    isExternal: false,
+  },
+  {
     textKey: 'appStore',
     urlKey: 'appStoreUrl',
     isExternal: true,
@@ -83,6 +88,7 @@ export const navTranslations: Record<languagesType, Record<string, string>> = {
   en: {
     // Button texts
     devbox: 'DevBox',
+    databases: 'Databases',
     appStore: 'App Store',
     docs: 'Docs',
     case: 'Customers',
@@ -93,6 +99,7 @@ export const navTranslations: Record<languagesType, Record<string, string>> = {
 
     // URLs
     devboxUrl: '/devbox',
+    databasesUrl: '/products/databases',
     appStoreUrl: templateDomain,
     docsUrl: '/docs',
     caseUrl: '/',
