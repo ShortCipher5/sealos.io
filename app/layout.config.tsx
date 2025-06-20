@@ -1,6 +1,5 @@
 import { templateDomain } from '@/config/site';
 import { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
-import Image from 'next/image';
 import { getLanguageSlug, languagesType } from '@/lib/i18n';
 
 /**
@@ -32,30 +31,38 @@ type HeaderLinkType = {
   textKey: string;
   urlKey: string;
   isExternal?: boolean;
+  children?: HeaderLinkType[];
 };
 
 // Define the basic navigation link data (without translation text and localized URLs)
 export const HeaderLinksData: HeaderLinkType[] = [
   {
-    textKey: 'devbox',
-    urlKey: 'devboxUrl',
+    textKey: 'products',
+    urlKey: '#',
     isExternal: false,
-  },
-  {
-    textKey: 'appStore',
-    urlKey: 'appStoreUrl',
-    isExternal: true,
+    children: [
+      {
+        textKey: 'devbox',
+        urlKey: 'devboxUrl',
+        isExternal: false,
+      },
+      {
+        textKey: 'databases',
+        urlKey: 'databasesUrl',
+        isExternal: false,
+      },
+      {
+        textKey: 'appStore',
+        urlKey: 'appStoreUrl',
+        isExternal: false,
+      },
+    ],
   },
   {
     textKey: 'docs',
     urlKey: 'docsUrl',
     isExternal: false,
   },
-  // {
-  //   textKey: 'pricing',
-  //   urlKey: 'pricingUrl',
-  //   isExternal: false,
-  // },
   {
     textKey: 'case',
     urlKey: 'caseUrl',
@@ -64,6 +71,11 @@ export const HeaderLinksData: HeaderLinkType[] = [
   {
     textKey: 'blog',
     urlKey: 'blogUrl',
+    isExternal: false,
+  },
+  {
+    textKey: 'pricing',
+    urlKey: 'pricingUrl',
     isExternal: false,
   },
   {
@@ -77,38 +89,48 @@ export const HeaderLinksData: HeaderLinkType[] = [
 export const navTranslations: Record<languagesType, Record<string, string>> = {
   en: {
     // Button texts
+    products: 'Products',
     devbox: 'DevBox',
+    databases: 'Databases',
     appStore: 'App Store',
     docs: 'Docs',
     case: 'Customers',
     blog: 'Blog',
+    pricing: 'Pricing',
     contact: 'Contact',
     getStarted: 'Get Started',
 
     // URLs
-    devboxUrl: '/devbox',
-    appStoreUrl: templateDomain,
+    devboxUrl: '/products/devbox',
+    databasesUrl: '/products/databases',
+    appStoreUrl: '/products/app-store',
     docsUrl: '/docs',
-    caseUrl: '/customers',
+    caseUrl: '/',
     blogUrl: '/blog',
+    pricingUrl: '/pricing',
     contactUrl: 'mailto:contact@sealos.io',
   },
   'zh-cn': {
     // Button texts
+    products: '产品',
     devbox: 'DevBox',
+    databases: '数据库',
     appStore: '应用商店',
     docs: '文档',
     case: '客户案例',
     blog: '博客',
+    pricing: '价格',
     contact: '联系我们',
     getStarted: '免费体验 7 天',
 
     // URLs
-    devboxUrl: '/devbox',
-    appStoreUrl: templateDomain,
+    devboxUrl: '/products/devbox',
+    databasesUrl: '/products/databases',
+    appStoreUrl: '/products/app-store',
     docsUrl: '/docs',
     caseUrl: '/customers',
     blogUrl: '/blog',
+    pricingUrl: 'https://sealos.run/pricing',
     contactUrl:
       'https://fael3z0zfze.feishu.cn/share/base/form/shrcn5oHHTKCf3VREMKOhEy6fmf',
   },
@@ -117,15 +139,24 @@ export const navTranslations: Record<languagesType, Record<string, string>> = {
 // Generate navigation links with translated text and URLs using the language parameter
 export const getHeaderLinks = (lang: languagesType) => {
   // Filter out the 'case' (Customers) link for English pages
-  return HeaderLinksData
-    .filter(link => !(link.textKey === 'case' && lang === 'en'))
-    .map((link) => ({
-      text: navTranslations[lang][link.textKey],
+  return HeaderLinksData.filter(
+    (link) => !(link.textKey === 'case' && lang === 'en'),
+  ).map((link) => ({
+    text: navTranslations[lang][link.textKey],
+    url:
+      link.urlKey === '#'
+        ? '#'
+        : (link.isExternal ? '' : getLanguageSlug(lang)) +
+          navTranslations[lang][link.urlKey],
+    isExternal: link.isExternal,
+    children: link.children?.map((child) => ({
+      text: navTranslations[lang][child.textKey],
       url:
-        (link.isExternal ? '' : getLanguageSlug(lang)) +
-        navTranslations[lang][link.urlKey],
-      isExternal: link.isExternal,
-    }));
+        (child.isExternal ? '' : getLanguageSlug(lang)) +
+        navTranslations[lang][child.urlKey],
+      isExternal: child.isExternal,
+    })),
+  }));
 };
 
 // Maintain backwards compatibility with default English navigation links

@@ -2,8 +2,16 @@ import React from 'react';
 import { siteConfig, templateDomain } from '@/config/site';
 import Link from 'fumadocs-core/link';
 import { cn } from '@/lib/utils';
-import { DiscordIcon, GithubIcon, BilibiliIcon, WechatIcon } from '../ui/icons';
+import {
+  DiscordIcon,
+  GithubIcon,
+  BilibiliIcon,
+  WechatIcon,
+  RSSIcon,
+} from '../ui/icons';
 import { languagesType, i18n } from '@/lib/i18n';
+
+const year = new Date().getFullYear();
 
 interface FooterLinkColumnProps {
   children: React.ReactNode;
@@ -27,7 +35,7 @@ const FooterLink: React.FC<FooterLinkProps> = ({
   <Link
     href={href}
     className={cn(
-      'hover:underline-decoration-4 hover:underline-color-[#005B9C] text-sm font-medium text-custom-secondary-text hover:text-[#005B9C] hover:underline hover:underline-offset-4',
+      'hover:underline-decoration-4 hover:underline-color-[#005B9C] text-custom-secondary-text text-sm font-medium hover:text-[#005B9C] hover:underline hover:underline-offset-4',
       className,
     )}
   >
@@ -53,58 +61,85 @@ const FooterLinksData: Record<string, FooterCategoryType> = {
     titleKey: 'resourcesTitle',
     links: [
       { textKey: 'docs', urlKey: 'docsUrl', isExternal: false },
-      { textKey: 'appStore', urlKey: 'appStoreUrl', isExternal: true }
-    ]
+      { textKey: 'education', urlKey: 'educationUrl', isExternal: false },
+      { textKey: 'blog', urlKey: 'blogUrl', isExternal: false },
+    ],
   },
   products: {
     titleKey: 'productsTitle',
     links: [
       { textKey: 'devbox', urlKey: 'devboxUrl', isExternal: false },
-      { textKey: 'fastgpt', urlKey: 'fastgptUrl', isExternal: true }
-    ]
+      { textKey: 'databases', urlKey: 'databasesUrl', isExternal: false },
+      { textKey: 'appStore', urlKey: 'appStoreUrl', isExternal: true },
+    ],
+  },
+  services: {
+    titleKey: 'servicesTitle',
+    links: [
+      { textKey: 'pricing', urlKey: 'pricingUrl', isExternal: false },
+      { textKey: 'fastgpt', urlKey: 'fastgptUrl', isExternal: true },
+    ],
   },
   support: {
     titleKey: 'supportTitle',
-    links: [
-      { textKey: 'contactUs', urlKey: 'contactUsUrl', isExternal: true }
-    ]
+    links: [{ textKey: 'contactUs', urlKey: 'contactUsUrl', isExternal: true }],
   },
   legal: {
     links: [
-      { textKey: 'termsOfService', urlKey: 'termsOfServiceUrl', isExternal: false },
-      { textKey: 'privacyPolicy', urlKey: 'privacyPolicyUrl', isExternal: false },
-      { textKey: 'cookiePolicy', urlKey: 'cookiePolicyUrl', isExternal: false }
-    ]
-  }
+      {
+        textKey: 'termsOfService',
+        urlKey: 'termsOfServiceUrl',
+        isExternal: false,
+      },
+      {
+        textKey: 'privacyPolicy',
+        urlKey: 'privacyPolicyUrl',
+        isExternal: false,
+      },
+      { textKey: 'cookiePolicy', urlKey: 'cookiePolicyUrl', isExternal: false },
+    ],
+  },
 };
 
 // Define translations for footer text and URLs
-export const footerTranslations: Record<languagesType, Record<string, string>> = {
+export const footerTranslations: Record<
+  languagesType,
+  Record<string, string>
+> = {
   en: {
     // Category titles
     resourcesTitle: 'Resources',
     productsTitle: 'Products',
+    servicesTitle: 'Services',
     supportTitle: 'Support',
 
     // Link texts
     docs: 'Docs',
+    education: 'Education',
+    blog: 'Blog',
     appStore: 'App Store',
     devbox: 'DevBox',
+    databases: 'Databases',
     fastgpt: 'FastGPT',
     contactUs: 'Contact Us',
+    pricing: 'Pricing',
     case: 'Customers ',
     termsOfService: 'Terms of Service',
     privacyPolicy: 'Privacy Policy',
     cookiePolicy: 'Cookie Policy',
-    copyright: 'Copyright © 2024 Sealos. All rights reserved.',
+    copyright: `Copyright © ${year} Sealos. All rights reserved.`,
 
     // URLs
     docsUrl: '/docs/quick-start',
-    appStoreUrl: templateDomain,
-    devboxUrl: '/devbox',
+    educationUrl: '/education',
+    blogUrl: '/blog',
+    appStoreUrl: '/products/app-store',
+    devboxUrl: '/products/devbox',
+    databasesUrl: '/products/databases',
     fastgptUrl: 'https://tryfastgpt.ai',
+    pricingUrl: '/pricing',
     contactUsUrl: 'mailto:contact@sealos.io',
-    caseUrl: '/customers',
+    caseUrl: '/',
     termsOfServiceUrl: '/docs/msa/terms-of-service',
     privacyPolicyUrl: '/docs/msa/privacy-policy',
     cookiePolicyUrl: '/legal/cookie-policy',
@@ -113,29 +148,39 @@ export const footerTranslations: Record<languagesType, Record<string, string>> =
     // Category titles
     resourcesTitle: '资源',
     productsTitle: '产品',
+    servicesTitle: '服务',
     supportTitle: '支持',
 
     // Link texts
     docs: '文档',
+    education: '教育',
+    blog: '博客',
     appStore: '应用商店',
     devbox: 'DevBox',
+    databases: '数据库',
     fastgpt: 'FastGPT',
     aiproxy: 'AI Proxy',
     case: '案例',
     forum: '社区',
+    pricing: '价格',
     contactUs: '联系我们',
     termsOfService: '服务条款',
     privacyPolicy: '隐私政策',
     cookiePolicy: 'Cookie 政策',
-    copyright: 'Copyright © 2024 Sealos. 粤ICP备2023048773号 珠海环界云计算有限公司版权所有',
+    copyright: `Copyright © ${year} Sealos. 粤ICP备2023048773号 珠海环界云计算有限公司版权所有`,
 
     // URLs - keeping the same URLs as English but can be customized if needed
     docsUrl: '/docs/quick-start',
-    appStoreUrl: templateDomain,
-    devboxUrl: '/devbox',
+    educationUrl: '/education',
+    blogUrl: '/blog',
+    appStoreUrl: '/products/app-store',
+    devboxUrl: '/products/devbox',
+    databasesUrl: '/products/databases',
     fastgptUrl: 'https://fastgpt.cn',
     aiproxyUrl: '/aiproxy',
-    contactUsUrl: 'https://fael3z0zfze.feishu.cn/share/base/form/shrcn5oHHTKCf3VREMKOhEy6fmf',
+    pricingUrl: 'https://sealos.run/pricing',
+    contactUsUrl:
+      'https://fael3z0zfze.feishu.cn/share/base/form/shrcn5oHHTKCf3VREMKOhEy6fmf',
     caseUrl: '/customers',
     forumUrl: 'https://forum.sealos.run',
     termsOfServiceUrl: '/docs/msa/terms-of-service',
@@ -148,49 +193,74 @@ export const footerTranslations: Record<languagesType, Record<string, string>> =
 const getFooterLinks = (lang: languagesType) => {
   const translations = footerTranslations[lang];
 
-  const productLinks = [...FooterLinksData.products.links];
+  const servicesLinks = [...FooterLinksData.services.links];
   if (lang === 'zh-cn') {
-    productLinks.push({ textKey: 'aiproxy', urlKey: 'aiproxyUrl', isExternal: false });
+    servicesLinks.push({
+      textKey: 'aiproxy',
+      urlKey: 'aiproxyUrl',
+      isExternal: false,
+    });
   }
+
   const supportLinks = [...FooterLinksData.support.links];
   supportLinks.push({ textKey: 'case', urlKey: 'caseUrl', isExternal: false });
   if (lang === 'zh-cn') {
-    supportLinks.push({ textKey: 'forum', urlKey: 'forumUrl', isExternal: true });
+    supportLinks.push({
+      textKey: 'forum',
+      urlKey: 'forumUrl',
+      isExternal: true,
+    });
   }
 
   return {
     resources: {
-      title: FooterLinksData.resources.titleKey ? translations[FooterLinksData.resources.titleKey] : '',
-      links: FooterLinksData.resources.links.map(link => ({
+      title: FooterLinksData.resources.titleKey
+        ? translations[FooterLinksData.resources.titleKey]
+        : '',
+      links: FooterLinksData.resources.links.map((link) => ({
         text: translations[link.textKey],
         url: translations[link.urlKey],
-        isExternal: link.isExternal
-      }))
+        isExternal: link.isExternal,
+      })),
     },
     products: {
-      title: FooterLinksData.products.titleKey ? translations[FooterLinksData.products.titleKey] : '',
-      links: productLinks.map(link => ({
+      title: FooterLinksData.products.titleKey
+        ? translations[FooterLinksData.products.titleKey]
+        : '',
+      links: FooterLinksData.products.links.map((link) => ({
         text: translations[link.textKey],
         url: translations[link.urlKey],
-        isExternal: link.isExternal
-      }))
+        isExternal: link.isExternal,
+      })),
+    },
+    services: {
+      title: FooterLinksData.services.titleKey
+        ? translations[FooterLinksData.services.titleKey]
+        : '',
+      links: servicesLinks.map((link) => ({
+        text: translations[link.textKey],
+        url: translations[link.urlKey],
+        isExternal: link.isExternal,
+      })),
     },
     support: {
-      title: FooterLinksData.support.titleKey ? translations[FooterLinksData.support.titleKey] : '',
-      links: supportLinks.map(link => ({
+      title: FooterLinksData.support.titleKey
+        ? translations[FooterLinksData.support.titleKey]
+        : '',
+      links: supportLinks.map((link) => ({
         text: translations[link.textKey],
         url: translations[link.urlKey],
-        isExternal: link.isExternal
-      }))
+        isExternal: link.isExternal,
+      })),
     },
     legal: {
-      links: FooterLinksData.legal.links.map(link => ({
+      links: FooterLinksData.legal.links.map((link) => ({
         text: translations[link.textKey],
         url: translations[link.urlKey],
-        isExternal: link.isExternal
-      }))
+        isExternal: link.isExternal,
+      })),
     },
-    copyright: translations.copyright
+    copyright: translations.copyright,
   };
 };
 
@@ -198,14 +268,16 @@ interface FooterProps {
   lang?: languagesType;
 }
 
-const Footer = async ({ lang = i18n.defaultLanguage as languagesType }: FooterProps) => {
+const Footer = async ({
+  lang = i18n.defaultLanguage as languagesType,
+}: FooterProps) => {
   const footerLinks = getFooterLinks(lang);
 
   return (
     <div className="relative w-full pt-20">
       <div className="mx-auto flex max-w-7xl flex-col items-start justify-between text-sm max-xl:px-8 lg:flex-row">
         <div>
-          <div className="mb-4 mr-4 md:flex">
+          <div className="mr-4 mb-4 md:flex">
             <Link
               href={'/'}
               aria-label={siteConfig.name}
@@ -222,14 +294,14 @@ const Footer = async ({ lang = i18n.defaultLanguage as languagesType }: FooterPr
               <span className="text-xl font-bold">{siteConfig.name}</span>
             </Link>
           </div>
-          <div className="mt-3 text-xs font-medium text-custom-secondary-text sm:text-sm">
+          <div className="text-custom-secondary-text mt-3 text-xs font-medium sm:text-sm">
             {siteConfig.tagline}
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-3 items-start gap-10 lg:mt-0">
+        <div className="mt-10 grid grid-cols-4 items-start gap-10 lg:mt-0">
           <FooterLinkColumn>
-            <div className="text-base font-semibold uppercase text-black hover:text-black hover:no-underline">
+            <div className="text-base font-semibold text-black uppercase hover:text-black hover:no-underline">
               {footerLinks.resources.title}
             </div>
             {footerLinks.resources.links.map((link, index) => (
@@ -239,7 +311,7 @@ const Footer = async ({ lang = i18n.defaultLanguage as languagesType }: FooterPr
             ))}
           </FooterLinkColumn>
           <FooterLinkColumn>
-            <div className="text-base font-semibold uppercase text-black hover:text-black hover:no-underline">
+            <div className="text-base font-semibold text-black uppercase hover:text-black hover:no-underline">
               {footerLinks.products.title}
             </div>
             {footerLinks.products.links.map((link, index) => (
@@ -249,7 +321,17 @@ const Footer = async ({ lang = i18n.defaultLanguage as languagesType }: FooterPr
             ))}
           </FooterLinkColumn>
           <FooterLinkColumn>
-            <div className="text-base font-semibold uppercase text-black hover:text-black hover:no-underline">
+            <div className="text-base font-semibold text-black uppercase hover:text-black hover:no-underline">
+              {footerLinks.services.title}
+            </div>
+            {footerLinks.services.links.map((link, index) => (
+              <FooterLink key={index} href={link.url}>
+                {link.text}
+              </FooterLink>
+            ))}
+          </FooterLinkColumn>
+          <FooterLinkColumn>
+            <div className="text-base font-semibold text-black uppercase hover:text-black hover:no-underline">
               {footerLinks.support.title}
             </div>
             {footerLinks.support.links.map((link, index) => (
@@ -262,12 +344,12 @@ const Footer = async ({ lang = i18n.defaultLanguage as languagesType }: FooterPr
       </div>
 
       <div className="mt-16 h-[1px] w-full bg-[#DDE7F7]"></div>
-      <div className="mx-auto flex max-w-7xl justify-between px-2 pb-6 pl-2 pt-4">
-        <div className="flex items-center space-x-2 text-[10px] font-normal text-custom-secondary-text md:text-sm">
+      <div className="mx-auto flex max-w-7xl justify-between px-2 pt-4 pb-6 pl-2">
+        <div className="text-custom-secondary-text flex items-center space-x-2 text-[10px] font-normal md:text-sm">
           {footerLinks.legal.links.map((link, index) => (
             <FooterLink
               key={index}
-              className="text-[10px] font-normal text-custom-secondary-text md:text-sm"
+              className="text-custom-secondary-text text-[10px] font-normal md:text-sm"
               href={link.url}
             >
               {link.text}
@@ -329,13 +411,20 @@ const Footer = async ({ lang = i18n.defaultLanguage as languagesType }: FooterPr
           )}
           {lang === 'zh-cn' && (
             <Link
-            className="flex size-8 items-center justify-center rounded-full bg-[#FAFCFF] object-center hover:bg-[#1118240D]"
-            href={siteConfig.links.wechat}
-            aria-label="WeChat"
-          >
-            <WechatIcon />
-          </Link>
+              className="flex size-8 items-center justify-center rounded-full bg-[#FAFCFF] object-center hover:bg-[#1118240D]"
+              href={siteConfig.links.wechat}
+              aria-label="WeChat"
+            >
+              <WechatIcon />
+            </Link>
           )}
+          <Link
+            className="flex size-8 items-center justify-center rounded-full bg-[#FAFCFF] object-center hover:bg-[#1118240D]"
+            href="/rss.xml"
+            aria-label="RSS Feed"
+          >
+            <RSSIcon />
+          </Link>
         </div>
       </div>
     </div>
