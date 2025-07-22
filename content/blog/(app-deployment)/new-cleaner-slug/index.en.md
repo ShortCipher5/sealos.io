@@ -2,12 +2,13 @@
 language: en
 category: (app-deployment)
 title: new title
-slug: new-cleaner-slug
+slug-manual: "123"
 description: fdsa
 date: 2025-07-22T10:14:58.956Z
-tags:
-  - fsadf
 authors:
   - default
+slug: new-cleaner-slug
+tags:
+  - fsadf
 ---
 fdas
