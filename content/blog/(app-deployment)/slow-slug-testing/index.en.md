@@ -4,10 +4,10 @@ category: (app-deployment)
 title: long long super title
 slug: slow-slug-testing
 description: gfdsg
-date: 2025-07-22T12:45:24.235Z
+date: 2025-07-22
 tags:
   - g
 authors:
   - default
 ---
-g
+fdsafsdaffsad f sda ds
