@@ -1,18 +1,21 @@
 ---
-title: 'How to Deploy Tolgee Localization Platform on Sealos'
-imgTItle: 'Deploy Tolgee on Sealos with one click'
-description: Deploy Tolgee, the open-source localization platform, on Sealos with one click. Get automatic SSL, custom domains, backups, and scaling without complex setup.
+language: en
+category: app-deployment
+title: How to Deploy Tolgee Localization Platform on Sealos
+description: Deploy Tolgee, the open-source localization platform, on Sealos
+  with one click. Get automatic SSL, custom domains, backups, and scaling
+  without complex setup. 123
 date: 2025-06-16
+authors:
+  - default
+imgTItle: Deploy Tolgee on Sealos with one click
 tags:
-  [
-    'Sealos',
-    'Tolgee',
-    'Localization',
-    'i18n',
-    'Translation',
-    'One-click deployment',
-  ]
-authors: ['default']
+  - Sealos
+  - Tolgee
+  - Localization
+  - i18n
+  - Translation
+  - One-click deployment
 ---
 
 Businesses that fail to speak their customers' native languages are essentially closing doors to vast market opportunities. Application localization (l10n) and internationalization (i18n) have evolved from nice-to-have features to critical business requirements that can make or break a product's global success. The complexity of managing translations across multiple languages, coordinating with translators worldwide, and maintaining consistency across different platforms has traditionally been a significant barrier for many development teams.
