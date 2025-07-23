@@ -8,7 +8,9 @@ description: How Sealos integrates multi-tenancy, DevBox, Kubernetes, and Envoy
 date: 2025-07-23
 tags:
   - sealos
-  - ZeroTrust
+  - zerotrus
+  - Cloud-Native
+  - DevOps
 authors:
   - default
 ---
