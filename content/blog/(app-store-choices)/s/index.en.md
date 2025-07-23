@@ -11,4 +11,4 @@ tags:
 authors:
   - default
 ---
-![](/images/1_6bfmkmdgzrwwvvpsay3ivw.webp)
+![alt-text](content/blog/app-store-choices/s/images/1_6bfmkmdgzrwwvvpsay3ivw.webp "title")
