@@ -12,3 +12,5 @@ authors:
   - default
 ---
 123
+
+![](best-practices/123/images/1_6bfmkmdgzrwwvvpsay3ivw.webp)
