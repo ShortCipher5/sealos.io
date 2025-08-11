@@ -10,17 +10,16 @@ description: >
   In today’s cloud-native environment, high availability (HA) is no longer an advanced capability reserved for large enterprises with extensive infrastructure teams. It has become a foundational requirement across use cases and user types - from startups deploying SaaS platforms, to universities managing large-scale competition systems, to developers and students running projects and experiments.
 date: 2025-07-24
 tags:
-  - sealos
+  - Sealos
   - Cloud-Native
   - DevOps
-  - devbox
+  - DevBox
   - HA
   - high-availability
 authors:
   - default
+collection: blog
 ---
-
-
 The expectation is simple: **your services should always be available**. But achieving that level of reliability is far from simple - [Sealos](https://sealos.io/) changes that. By design, Sealos makes high availability not just possible - but default.
 
  
